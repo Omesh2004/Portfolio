@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,15 +52,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Tech theme colors
-				tech: {
-					dark: '#0a192f',
-					light: '#172a45',
-					accent: '#64ffda',
+				// Mystic theme colors (Kung Fu Panda vibe)
+				mystic: {
+					bg: '#0a0a0a', // Deep charcoal/black
+					red: '#be123c', // Crimson dragon red
+					gold: '#f59e0b', // Golden chi
+					orange: '#f97316', // Warm flame
+					jade: '#10b981', // Jade green
+					glass: 'rgba(20, 20, 20, 0.4)',
+					glassBorder: 'rgba(245, 158, 11, 0.15)',
 				},
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
+				sans: ['Outfit', 'Inter', 'sans-serif'],
 				mono: ['JetBrains Mono', 'monospace'],
 			},
 			borderRadius: {
@@ -103,12 +106,16 @@ export default {
 					'50%': { transform: 'translateY(0)' }
 				},
 				'glow': {
-					'0%, 100%': { boxShadow: '0 0 5px rgba(100, 255, 218, 0.5)' },
-					'50%': { boxShadow: '0 0 20px rgba(100, 255, 218, 0.8)' }
+					'0%, 100%': { boxShadow: '0 0 5px rgba(6, 182, 212, 0.5)' },
+					'50%': { boxShadow: '0 0 20px rgba(192, 38, 211, 0.8)' }
 				},
 				'spin-slow': {
 					'0%': { transform: 'rotate(0deg)' },
 					'100%': { transform: 'rotate(360deg)' }
+				},
+				'aurora': {
+					'0%, 100%': { transform: 'translateY(0) scale(1)' },
+					'50%': { transform: 'translateY(-20px) scale(1.05)' }
 				}
 			},
 			animation: {
@@ -120,8 +127,9 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'typing': 'typing 3.5s steps(40, end)',
 				'bounce-light': 'bounce-light 3s infinite',
-				'glow': 'glow 2s infinite',
+				'glow': 'glow 3s infinite alternate',
 				'spin-slow': 'spin-slow 15s linear infinite',
+				'aurora': 'aurora 10s ease-in-out infinite',
 			}
 		}
 	},

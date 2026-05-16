@@ -65,12 +65,13 @@ const Navbar = () => {
             {/* Logo */}
             <motion.button
               onClick={scrollToTop}
-              className="flex items-center gap-2 text-[#7aa2f7] hover:text-[#9ece6a] transition-colors font-mono group"
+              className="flex items-center gap-2 text-[#c8a97e]/70 font-mono group"
+              style={{ transition: 'color 0.3s ease' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Terminal className="w-6 h-6" />
-              <span className="text-lg font-semibold hidden sm:block">akhand@iitpatna</span>
+              <span className="text-lg font-semibold hidden sm:block">omesh@iitpatna</span>
             </motion.button>
 
             {/* Desktop Navigation */}

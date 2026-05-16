@@ -1,89 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Award } from "lucide-react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: i * 0.1,
+    },
+  }),
+};
 
 const Experience = () => {
   const experiences = [
     {
-      title: "Software Engineer Intern",
-      company: "Cisco",
-      location: "Bengaluru, Karnataka, India · On-site",
-      period: "May 2025 - Jul 2025 · 3 mos",
-      logo: "/cisco-logo.png",
+      title: "Velora (Inter IIT Tech Meet 14.0)",
+      company: "Market Intel Platform",
+      location: "IIT Patna",
+      period: "Nov 2025 - Dec 2025",
+      image: "/images/pathway_2nd.jpeg",
       description: [
-        "Worked on an intelligent system that detects contract and policy anomalies in ACI systems for inter EPG/ESG/vzany/L3out Communication",
-        "Integrated a RAG system based on ACI White papers for recommending amendments in the policies"
+        "A real-time market intelligence and research platform that continuously collects data from multiple sources like news websites, stock market feeds, Reddit/social media, and NSE corporate filings.",
+        "The system processes and enriches this streaming data using a Medallion Architecture (Bronze → Silver → Gold) built on Kafka and Pathway.",
+        "Analyzes sentiment, extracts company-related insights, computes stock indicators, and converts data into vector embeddings for AI-powered semantic search and Retrieval-Augmented Generation (RAG).",
+        "Includes agentic AI workflows and chatbot-based research tools that help users query market trends, company insights, and financial intelligence in real time."
       ],
-      technologies: ["Python", "RAG", "ACI", "Policy Analysis", "AI/ML"]
+      technologies: ["Kafka", "Pathway", "RAG", "Agentic AI", "Medallion Architecture", "Vector Embeddings"]
     },
     {
-      title: "Game Developer Intern",
-      company: "AiCade",
-      location: "Remote",
-      period: "Oct 2024 - Nov 2024 · 2 mos",
-      logo: "/aicade_logo.jpg",
+      title: "IIT Patna Official Website",
+      company: "Lead Full Stack Developer",
+      location: "Patna, India",
+      period: "Jan 2026 - Present",
+      image: "/images/institute_web.jpeg",
       description: [
-        "Worked on Phaser 3 JS to automate the making of in-browser games on given prompts to the tool",
-        "Developed automated game generation pipeline using JavaScript frameworks"
+        "Revitalized the official institute platform serving 10,000+ monthly users by migrating legacy systems to a modern Next.js architecture.",
+        "Slashed Time-to-Interactive (TTI) by 30% through advanced GSAP animations, lazy loading, and code-splitting strategies.",
+        "Directed a 6-member agile team to deliver a scalable, responsive beta platform, enforcing strict code review standards."
       ],
-      technologies: ["Phaser 3", "JavaScript", "Game Development", "Automation"]
+      technologies: ["Next.js", "React", "Node.js", "Tailwind", "Strapi", "GSAP"]
+    },
+    {
+      title: "Institute Web Team Certificate",
+      company: "IIT Patna",
+      location: "Patna, India",
+      period: "2023 - Present",
+      image: "/images/institute_web_certificate.jpeg",
+      description: [
+        "Official certification for contributing as a core member of the Institute Web Team.",
+        "Recognized for outstanding contributions to the university's digital infrastructure."
+      ],
+      technologies: ["Web Development", "Team Leadership", "Project Management"]
+    },
+    {
+      title: "Institute Web Team",
+      company: "Core Team Member",
+      location: "Patna, India",
+      period: "2023 - Present",
+      image: "/images/institute web team.jpeg",
+      description: [
+        "Collaborated with cross-functional teams to build and maintain university web portals.",
+        "Organized tech events and conducted workshops on modern web technologies."
+      ],
+      technologies: ["Collaboration", "Agile", "Frontend", "Backend"]
+    },
+    {
+      title: "JEE Advanced 2023",
+      company: "Competitive Examination",
+      location: "India",
+      period: "2023",
+      image: "/images/jee adv.jpeg",
+      description: [
+        "Successfully cleared JEE Advanced, securing admission to IIT Patna.",
+        "Demonstrated exceptional problem-solving skills and mathematical aptitude."
+      ],
+      technologies: ["Physics", "Chemistry", "Mathematics", "Problem Solving"]
     }
   ];
 
+  const [modalImage, setModalImage] = useState<string | null>(null);
+
   return (
-    <section id="experience" className="min-h-screen py-20 bg-black">
+    <section id="experience" className="min-h-screen py-20 relative z-10 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4">
-        <h2 className="section-heading text-[#a9b1d6] mb-8">
-          <span className="text-[#7aa2f7] font-mono">02.</span> Experience
+        <h2 className="section-heading">
+          <span className="text-[#c8a97e] font-mono text-2xl mr-2">02.</span> Certificates & Real World Projects
         </h2>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-[#1a1b26] rounded-lg shadow-2xl overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="glass-card"
         >
-          {/* Window Header */}
-          <div className="h-10 flex items-center px-4 bg-[#24283b] border-b border-[#414868]">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-[#f7768e]"></div>
-              <div className="h-3 w-3 rounded-full bg-[#e0af68]"></div>
-              <div className="h-3 w-3 rounded-full bg-[#9ece6a]"></div>
-            </div>
-            <div className="text-xs text-center flex-1 text-gray-400 font-mono">
-              experience@iitpatna: ~/career
-            </div>
-          </div>
-
           {/* Content */}
-          <div className="p-6 space-y-6">
+          <div className="p-2 md:p-6 space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 border border-[#414868] rounded-lg p-6 hover:border-[#7aa2f7] transition-all duration-300 hover:shadow-lg hover:shadow-[#7aa2f7]/10"
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 bg-white/[0.03] border border-white/10 rounded-xl p-6 relative overflow-hidden group"
+                style={{ transition: 'background 0.4s ease, border-color 0.4s ease' }}
               >
-                {/* Company Logo */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#c8a97e]/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.4s ease' }} />
+                
+                {/* Image */}
                 <div className="flex items-start justify-center lg:justify-start">
-                  <div className="w-40 h-40 bg-[#24283b] rounded-lg border border-[#414868] flex items-center justify-center overflow-hidden hover:border-[#7aa2f7] transition-colors flex-shrink-0">
+                  <div 
+                    className="w-full aspect-video lg:aspect-square lg:h-48 bg-[#0d0e12]/50 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 cursor-pointer"
+                    style={{ transition: 'border-color 0.4s ease' }}
+                    onClick={() => setModalImage(exp.image)}
+                  >
                     <img
-                      src={exp.logo}
-                      alt={`${exp.company} logo`}
-                      className="w-full h-full object-contain p-4 rounded-lg"
+                      src={exp.image}
+                      alt={`${exp.title} image`}
+                      className="w-full h-full object-cover"
+                      style={{ transition: 'transform 0.6s ease' }}
+                      onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       onError={(e) => {
-                        // Fallback if logo doesn't load
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
                         if (parent) {
                           parent.innerHTML = `
-                            <div class="flex flex-col items-center justify-center text-[#565f89] p-4">
-                              <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                              </svg>
-                              <span class="text-xs text-center font-mono">${exp.company}</span>
+                            <div class="flex flex-col items-center justify-center text-white/40 p-4">
+                              <span class="text-sm text-center font-medium">Image not found</span>
                             </div>
                           `;
                         }
@@ -93,38 +143,42 @@ const Experience = () => {
                 </div>
 
                 {/* Experience Details */}
-                <div className="flex flex-col min-w-0">
+                <div className="flex flex-col min-w-0 relative z-10">
                   {/* Header */}
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                     <div className="flex-grow min-w-0">
-                      <h3 className="text-xl font-semibold text-[#7aa2f7] mb-2">
+                      <h3 className="text-2xl font-bold text-[#d4b896] mb-2">
                         {exp.title}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-2 text-[#a9b1d6] mb-2">
-                        <span className="font-medium text-lg">{exp.company}</span>
+                      <div className="flex flex-wrap items-center gap-2 text-white/100 mb-2">
+                        <span className="font-bold text-lg tracking-wide">{exp.company}</span>
                         {exp.location && (
                           <>
-                            <span className="text-[#565f89]">•</span>
-                            <span className="flex items-center gap-1 text-[#565f89] text-sm">
-                              <MapPin className="w-3 h-3 flex-shrink-0" />
+                            <span className="text-white/30">•</span>
+                            <span className="flex items-center gap-1 text-white/50 text-sm">
+                              <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#c8a97e]/70" />
                               {exp.location}
                             </span>
                           </>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-[#7aa2f7] font-mono text-sm bg-[#24283b] px-3 py-1.5 rounded border border-[#414868] flex-shrink-0">
+                    <div className="flex items-center gap-2 text-[#c8a97e]/80 text-sm bg-[#c8a97e]/8 px-4 py-2 rounded-full border border-[#c8a97e]/15 flex-shrink-0">
                       <Calendar className="w-4 h-4" />
                       {exp.period}
                     </div>
                   </div>
 
                   {/* Description */}
-                  <ul className="space-y-2 mb-4">
+                  <ul className="space-y-3 mb-6">
                     {exp.description.map((item, idx) => (
-                      <li key={idx} className="text-[#a9b1d6] flex items-start gap-3">
-                        <span className="text-[#7aa2f7] mt-1.5 flex-shrink-0">▸</span>
-                        <span>{item}</span>
+                      <li key={idx} className="text-white/60 flex items-start gap-3">
+                        <span className="text-[#c8a97e]/60 mt-1 flex-shrink-0">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L10 17L20 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                        <span className="leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -134,7 +188,8 @@ const Experience = () => {
                     {exp.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 bg-[#24283b] text-[#7aa2f7] text-xs font-mono rounded border border-[#414868] hover:border-[#7aa2f7] transition-colors"
+                        className="px-3 py-1.5 bg-white/[0.04] text-[#c8a97e]/70 text-xs font-medium tracking-wider uppercase rounded-full border border-white/10 cursor-default"
+                        style={{ transition: 'background 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}
                       >
                         {tech}
                       </span>
@@ -144,25 +199,27 @@ const Experience = () => {
               </motion.div>
             ))}
 
-            {/* Terminal-style footer */}
+            {/* Footer */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="border border-[#414868] rounded-lg p-4 font-mono text-sm bg-[#24283b]"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center justify-center gap-2 text-white/30 text-sm pt-4"
             >
-              <div className="flex items-center gap-2 text-[#a9b1d6]">
-                <span className="text-[#7aa2f7]">$</span>
-                <span className="text-[#565f89]">cat experience.log | tail -n 1</span>
-              </div>
-              <div className="text-[#565f89] mt-2 ml-4">
-                {experiences.length} position{experiences.length !== 1 ? 's' : ''} • Continuously learning and growing
-              </div>
+              <Award className="w-4 h-4" />
+              <span>{experiences.length} Highlights • Continuously learning and growing</span>
             </motion.div>
           </div>
         </motion.div>
       </div>
+
+      {/* Modal for image preview */}
+      {modalImage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={() => setModalImage(null)}>
+          <img src={modalImage} alt="Preview" className="max-w-full max-h-[90vh] object-contain rounded-2xl border border-white/10" />
+        </div>
+      )}
     </section>
   );
 };

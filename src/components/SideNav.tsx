@@ -21,7 +21,6 @@ const navItems = [
 const SideNav = () => {
   const [activeSection, setActiveSection] = React.useState('about');
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
-  const [isGlitching, setIsGlitching] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -39,15 +38,6 @@ const SideNav = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  React.useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      setIsGlitching(true);
-      setTimeout(() => setIsGlitching(false), 300); // Glitch duration
-    }, 3000); // Trigger every 5 seconds
-
-    return () => clearInterval(glitchInterval);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -73,29 +63,17 @@ const SideNav = () => {
       >
         <motion.button
           onClick={handleResumeClick}
-          className={`relative flex items-center gap-3 px-6 py-3 bg-black/80 backdrop-blur-lg rounded-full border border-gray-800 text-green-400 hover:bg-black/50 transition-all duration-300 ${
-            isGlitching ? 'glitch-effect' : ''
-          }`}
+          className="relative flex items-center gap-3 px-6 py-3 bg-white/[0.04] rounded-full border border-white/10 text-[#c8a97e]/70 group"
+          style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
+          <div className="absolute inset-0 bg-[#c8a97e]/5 rounded-full opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.3s ease' }} />
           <div className="relative">
-            <FileText className="w-5 h-5" />
-            {isGlitching && (
-              <>
-                <div className="absolute inset-0 glitch-layer-1" />
-                <div className="absolute inset-0 glitch-layer-2" />
-              </>
-            )}
+            <FileText className="w-5 h-5 group-hover:text-amber-300 transition-colors" />
           </div>
-          <span className="text-base font-medium relative">
+          <span className="text-base font-medium relative" style={{ transition: 'color 0.3s ease' }}>
             Resume
-            {isGlitching && (
-              <>
-                <div className="absolute inset-0 glitch-layer-1" />
-                <div className="absolute inset-0 glitch-layer-2" />
-              </>
-            )}
           </span>
         </motion.button>
       </motion.div>
@@ -120,11 +98,12 @@ const SideNav = () => {
                 onClick={() => scrollToSection(item.id)}
                 onHoverStart={() => setHoveredItem(item.id)}
                 onHoverEnd={() => setHoveredItem(null)}
-                className={`group relative flex items-center gap-4 p-2 rounded-lg transition-all duration-300 ${
+                className={`group relative flex items-center gap-4 p-3 rounded-xl ${
                   isActive 
-                    ? 'text-green-400 bg-black/50' 
-                    : 'text-gray-400 hover:text-green-400 hover:bg-black/30'
+                    ? 'text-[#c8a97e] bg-white/[0.06] border border-white/10' 
+                    : 'text-white/30 border border-transparent hover:text-[#c8a97e]/70 hover:bg-white/[0.03]'
                 }`}
+                style={{ transition: 'all 0.3s ease' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -133,56 +112,46 @@ const SideNav = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute -left-1 -right-1 -top-1 -bottom-1 border-2 border-green-400 rounded-lg"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-[#c8a97e]/50 rounded-xl"
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                     />
                   )}
                 </div>
                 
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex items-center gap-2"
-                  >
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="text-sm font-medium"
-                    >
-                      {item.label}
-                    </motion.span>
+                <AnimatePresence>
+                  {isHovered && (
                     <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ delay: 0.1 }}
+                      initial={{ opacity: 0, x: -20, width: 0 }}
+                      animate={{ opacity: 1, x: 0, width: 'auto' }}
+                      exit={{ opacity: 0, x: -20, width: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-2 overflow-hidden whitespace-nowrap"
                     >
+                      <span className="text-sm font-semibold tracking-wide">
+                        {item.label}
+                      </span>
                       <ChevronRight 
                         className={`w-4 h-4 transition-transform duration-300 ${
-                          isActive ? 'rotate-90' : 'group-hover:translate-x-1'
+                          isActive ? 'rotate-90 text-orange-400' : 'translate-x-1 text-amber-400'
                         }`}
                       />
                     </motion.div>
-                  </motion.div>
-                )}
+                  )}
+                </AnimatePresence>
               </motion.button>
             );
           })}
         </div>
 
-        {/* Terminal Typography Vertical */}
+        {/* Branding Vertical */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="border-t border-gray-800 pt-4 mt-4"
+          className="border-t border-white/10 pt-6 mt-4 flex justify-center"
         >
-          <div className="text-green-400 font-mono text-sm whitespace-nowrap writing-mode-vertical-rl rotate-180">
-            akhand@tech
+          <div className="font-bold text-sm tracking-[0.2em] whitespace-nowrap writing-mode-vertical-rl rotate-180 text-[#c8a97e]/30 hover:text-[#c8a97e]/60" style={{ transition: 'opacity 0.3s ease' }}>
+            OMESH.DEV
           </div>
         </motion.div>
       </motion.nav>
@@ -192,10 +161,10 @@ const SideNav = () => {
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden pb-safe"
       >
         <div className="mx-4 mb-4">
-          <div className="bg-black/80 backdrop-blur-lg rounded-full p-2 flex justify-around items-center border border-gray-800">
+          <div className="bg-[#0d0e12]/80 rounded-2xl p-2 flex justify-around items-center border border-white/10">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -204,11 +173,12 @@ const SideNav = () => {
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative p-3 rounded-full transition-all duration-300 ${
+                  className={`relative p-3 rounded-xl ${
                     isActive 
-                      ? 'text-green-400 bg-black/50' 
-                      : 'text-gray-400 hover:text-green-400 hover:bg-black/30'
+                      ? 'text-[#c8a97e] bg-white/[0.06]' 
+                      : 'text-white/30 hover:text-[#c8a97e]/70 hover:bg-white/[0.03]'
                   }`}
+                  style={{ transition: 'all 0.3s ease' }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <div className="relative">
@@ -216,8 +186,8 @@ const SideNav = () => {
                     {isActive && (
                       <motion.div
                         layoutId="mobileActiveIndicator"
-                        className="absolute -left-1 -right-1 -top-1 -bottom-1 border-2 border-green-400 rounded-full"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-[#c8a97e]/50 rounded-xl"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                       />
                     )}
                   </div>
@@ -234,43 +204,6 @@ const SideNav = () => {
 export default SideNav;
 
 const styles = `
-  @keyframes glitch {
-    0% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-2px, 2px);
-    }
-    40% {
-      transform: translate(-2px, -2px);
-    }
-    60% {
-      transform: translate(2px, 2px);
-    }
-    80% {
-      transform: translate(2px, -2px);
-    }
-    100% {
-      transform: translate(0);
-    }
-  }
-
-  .glitch-effect {
-    animation: glitch 0.2s linear;
-  }
-
-  .glitch-layer-1 {
-    background: rgba(255, 0, 0, 0.1);
-    animation: glitch 0.2s linear;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  }
-
-  .glitch-layer-2 {
-    background: rgba(0, 255, 255, 0.1);
-    animation: glitch 0.2s linear reverse;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  }
-
   .writing-mode-vertical-rl {
     writing-mode: vertical-rl;
     text-orientation: mixed;
