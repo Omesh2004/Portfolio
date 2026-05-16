@@ -37,7 +37,7 @@ const otherAchievements = [
     title: 'Amazon ML Challenge',
     description: 'Ranked among Top 3,000 teams out of 90,000+ participants nationwide (Top 3.33%).',
     date: '2025',
-    image: '/amazon.png'
+    image: '/images/amazon_ml_challenge.png'
   }
 ];
 
