@@ -143,17 +143,7 @@ const SideNav = () => {
           })}
         </div>
 
-        {/* Branding Vertical */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="border-t border-white/10 pt-6 mt-4 flex justify-center"
-        >
-          <div className="font-bold text-sm tracking-[0.2em] whitespace-nowrap writing-mode-vertical-rl rotate-180 text-[#c8a97e]/30 hover:text-[#c8a97e]/60" style={{ transition: 'opacity 0.3s ease' }}>
-            OMESH.DEV
-          </div>
-        </motion.div>
+        {/* Branding Vertical removed per request */}
       </motion.nav>
 
       {/* Mobile Bottom Navigation */}
