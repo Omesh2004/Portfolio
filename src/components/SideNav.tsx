@@ -49,7 +49,7 @@ const SideNav = () => {
 
   const handleResumeClick = () => {
     // Replace with your actual resume URL
-    window.open('https://drive.google.com/file/d/1SQZuBA4qkfb2cNEjMTrrKNZQbej8qNSo/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/1gxTm_xuFaUca8l6blBODmb8LsrMS67yu/view?usp=sharing', '_blank');
   };
 
   return (
