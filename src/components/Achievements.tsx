@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Trophy, CheckCircle } from 'lucide-react';
 
 const otherAchievements = [
@@ -41,14 +41,65 @@ const otherAchievements = [
   }
 ];
 
+// Animated counter component
+const AnimatedCounter: React.FC<{ value: string; suffix?: string }> = ({ value, suffix = '' }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const [displayValue, setDisplayValue] = useState('0');
+
+  useEffect(() => {
+    if (!isInView) return;
+    const numericValue = parseInt(value.replace(/\D/g, ''));
+    if (isNaN(numericValue)) {
+      setDisplayValue(value);
+      return;
+    }
+
+    let current = 0;
+    const step = Math.max(1, Math.floor(numericValue / 40));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= numericValue) {
+        current = numericValue;
+        clearInterval(timer);
+      }
+      setDisplayValue(current.toString());
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [isInView, value]);
+
+  return <span ref={ref}>{displayValue}{suffix}</span>;
+};
+
+const cardPopVariants = {
+  hidden: { opacity: 0, scale: 0.85, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: i * 0.08,
+    },
+  }),
+};
+
 const Achievements = () => {
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 relative z-10 overflow-hidden">
-      <h2 className="section-heading">
+      <motion.h2
+        className="section-heading"
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <span className="text-[#c8a97e] font-mono text-2xl mr-2">04.</span> Achievements
-      </h2>
+      </motion.h2>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -62,7 +113,14 @@ const Achievements = () => {
           
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center" style={{ transition: 'background 0.3s ease' }}>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center hover:border-[#c8a97e]/15"
+              style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
+            >
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center gap-3 mb-2">
                   <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode" className="w-8 h-8 rounded" />
@@ -71,7 +129,7 @@ const Achievements = () => {
                 <div className="flex flex-wrap gap-6 text-white/70 text-sm mt-2">
                   <div>
                     <span className="block text-xs text-white/40">Problems Solved</span>
-                    <span className="font-bold text-2xl text-[#c8a97e]">150+</span>
+                    <span className="font-bold text-2xl text-[#c8a97e]"><AnimatedCounter value="150" suffix="+" /></span>
                   </div>
                   <div>
                     <span className="block text-xs text-white/40">Focus Areas</span>
@@ -82,9 +140,16 @@ const Achievements = () => {
                   Consistent problem solver
                 </span>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center" style={{ transition: 'background 0.3s ease' }}>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center hover:border-[#a89bc8]/15"
+              style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
+            >
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-8 h-8 rounded bg-gradient-to-br from-[#8b7ec8]/40 to-[#6b5fa8]/40 flex items-center justify-center">
@@ -93,21 +158,39 @@ const Achievements = () => {
                   <span className="text-[#a89bc8] font-bold text-xl">Extra-Curriculars</span>
                 </div>
                 <div className="flex flex-col gap-3 text-white/60 text-sm mt-2">
-                  <div className="flex items-start gap-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="flex items-start gap-2"
+                  >
                     <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
                     <span>Coordinator, Development and OS Division, NJACK (2025)</span>
-                  </div>
-                  <div className="flex items-start gap-2">
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-start gap-2"
+                  >
                     <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
                     <span>Sub-Coordinator, Events Committee, Infinito Sports Fest (2024)</span>
-                  </div>
-                  <div className="flex items-start gap-2">
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                    className="flex items-start gap-2"
+                  >
                     <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
                     <span>Table Tennis Inter IIT Sports (2023)</span>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Hackathons & Competitions */}
@@ -120,11 +203,12 @@ const Achievements = () => {
             {otherAchievements.map((ach, idx) => (
               <motion.div 
                 key={idx} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                custom={idx}
+                variants={cardPopVariants}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94], delay: idx * 0.08 }}
-                className="bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden flex flex-col group"
+                className="bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden flex flex-col group hover:border-[#c8a97e]/15"
                 style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
               >
                 <button
@@ -136,10 +220,8 @@ const Achievements = () => {
                   <img
                     src={ach.image}
                     alt={ach.title}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.05]"
                     style={{ transition: 'transform 0.5s ease, opacity 0.3s ease' }}
-                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                       const parent = e.currentTarget.parentElement;

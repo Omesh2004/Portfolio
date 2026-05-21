@@ -9,6 +9,7 @@ import {
   FileText,
   Laptop
 } from 'lucide-react';
+import MagneticButton from './MagneticButton';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
@@ -49,7 +50,7 @@ const SideNav = () => {
 
   const handleResumeClick = () => {
     // Replace with your actual resume URL
-    window.open('https://drive.google.com/file/d/1gxTm_xuFaUca8l6blBODmb8LsrMS67yu/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/1AwIPMD5IBAdzAIOg1ISSg7e2G0k73FIf/view?usp=sharing', '_blank');
   };
 
   return (
@@ -61,21 +62,23 @@ const SideNav = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="fixed top-4 right-4 z-50"
       >
-        <motion.button
-          onClick={handleResumeClick}
-          className="relative flex items-center gap-3 px-6 py-3 bg-white/[0.04] rounded-full border border-white/10 text-[#c8a97e]/70 group"
-          style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div className="absolute inset-0 bg-[#c8a97e]/5 rounded-full opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.3s ease' }} />
-          <div className="relative">
-            <FileText className="w-5 h-5 group-hover:text-amber-300 transition-colors" />
-          </div>
-          <span className="text-base font-medium relative" style={{ transition: 'color 0.3s ease' }}>
-            Resume
-          </span>
-        </motion.button>
+        <MagneticButton strength={0.4} radius={80}>
+          <motion.button
+            onClick={handleResumeClick}
+            className="relative flex items-center gap-3 px-6 py-3 bg-white/[0.04] rounded-full border border-white/10 text-[#c8a97e]/70 group"
+            style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="absolute inset-0 bg-[#c8a97e]/5 rounded-full opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.3s ease' }} />
+            <div className="relative">
+              <FileText className="w-5 h-5 group-hover:text-amber-300 transition-colors" />
+            </div>
+            <span className="text-base font-medium relative" style={{ transition: 'color 0.3s ease' }}>
+              Resume
+            </span>
+          </motion.button>
+        </MagneticButton>
       </motion.div>
 
       {/* Desktop Navigation */}

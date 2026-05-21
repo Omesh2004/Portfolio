@@ -15,6 +15,17 @@ const cardVariants = {
   }),
 };
 
+// Alternating slide direction for visual interest
+const slideVariants = {
+  hiddenLeft: { opacity: 0, x: -50 },
+  hiddenRight: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
 const Experience = () => {
   const experiences = [
     {
@@ -87,9 +98,15 @@ const Experience = () => {
   return (
     <section id="experience" className="min-h-screen py-20 relative z-10 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4">
-        <h2 className="section-heading">
+        <motion.h2
+          className="section-heading"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
           <span className="text-[#c8a97e] font-mono text-2xl mr-2">02.</span> Certificates & Real World Projects
-        </h2>
+        </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -98,14 +115,17 @@ const Experience = () => {
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="glass-card"
         >
-          {/* Content */}
-          <div className="p-2 md:p-6 space-y-8">
+          {/* Content with timeline connector */}
+          <div className="p-2 md:p-6 space-y-8 relative">
+            {/* Vertical timeline line */}
+            <div className="absolute left-8 md:left-12 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#c8a97e]/20 to-transparent hidden lg:block" />
+
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
                 custom={index}
-                variants={cardVariants}
-                initial="hidden"
+                variants={slideVariants}
+                initial={index % 2 === 0 ? 'hiddenLeft' : 'hiddenRight'}
                 whileInView="visible"
                 viewport={{ once: true, margin: "-40px" }}
                 className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 bg-white/[0.03] border border-white/10 rounded-xl p-6 relative overflow-hidden group"
@@ -113,20 +133,21 @@ const Experience = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c8a97e]/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.4s ease' }} />
                 
+                {/* Timeline dot */}
+                <div className="absolute -left-[3px] md:left-[42px] top-8 w-[7px] h-[7px] rounded-full bg-[#c8a97e]/50 border border-[#c8a97e]/30 hidden lg:block" style={{ transition: 'background 0.3s ease' }} />
+
                 {/* Image */}
                 <div className="flex items-start justify-center lg:justify-start">
                   <div 
-                    className="w-full aspect-video lg:aspect-square lg:h-48 bg-[#0d0e12]/50 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 cursor-pointer"
+                    className="w-full aspect-video lg:aspect-square lg:h-48 bg-[#0d0e12]/50 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 cursor-pointer group/img"
                     style={{ transition: 'border-color 0.4s ease' }}
                     onClick={() => setModalImage(exp.image)}
                   >
                     <img
                       src={exp.image}
                       alt={`${exp.title} image`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover/img:scale-[1.06]"
                       style={{ transition: 'transform 0.6s ease' }}
-                      onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                      onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
@@ -188,7 +209,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 bg-white/[0.04] text-[#c8a97e]/70 text-xs font-medium tracking-wider uppercase rounded-full border border-white/10 cursor-default"
+                        className="px-3 py-1.5 bg-white/[0.04] text-[#c8a97e]/70 text-xs font-medium tracking-wider uppercase rounded-full border border-white/10 cursor-default hover:bg-white/[0.08] hover:border-[#c8a97e]/20"
                         style={{ transition: 'background 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}
                       >
                         {tech}

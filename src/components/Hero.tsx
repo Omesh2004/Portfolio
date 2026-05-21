@@ -1,6 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+// -- Typography Reveal Sub-component --
+const TextReveal: React.FC<{ text: string; className?: string; delay?: number; charDelay?: number }> = ({
+  text,
+  className = '',
+  delay = 0,
+  charDelay = 0.03,
+}) => {
+  return (
+    <span className={className} aria-label={text}>
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{
+            duration: 0.4,
+            delay: delay + i * charDelay,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
+// -- Glow sweep overlay --
+const GlowSweep: React.FC<{ delay?: number }> = ({ delay = 2.0 }) => (
+  <motion.div
+    className="absolute inset-0 pointer-events-none z-20"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: [0, 1, 0] }}
+    transition={{ duration: 1.5, delay, ease: 'easeInOut' }}
+    style={{
+      background: 'linear-gradient(90deg, transparent 0%, rgba(200,169,126,0.08) 40%, rgba(200,169,126,0.15) 50%, rgba(200,169,126,0.08) 60%, transparent 100%)',
+      maskImage: 'linear-gradient(90deg, transparent, black, transparent)',
+      WebkitMaskImage: 'linear-gradient(90deg, transparent, black, transparent)',
+    }}
+  />
+);
+
 const asciiDonutFrames = [
   
 ];
@@ -268,10 +311,13 @@ const Hero = () => {
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-transparent py-16 z-10">
       <motion.div 
         className="relative w-full max-w-4xl mx-4 terminal-window"
-        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
+        initial={{ opacity: 0, y: 30, scale: 0.92, filter: 'blur(8px)' }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+        transition={{ delay: 0.3, duration: 1.0, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
+        {/* Glow sweep animation */}
+        <GlowSweep delay={1.8} />
+
         <div className="w-full h-full">
           <div className="terminal-header">
             <div className="flex items-center gap-2">
@@ -292,7 +338,9 @@ const Hero = () => {
                   {phase === 'login' && (
                     <>
                       {loginLines.slice(0, loginStep).map((line, idx) => (
-                        <div key={idx} className="text-gray-400">{line.content}</div>
+                        <div key={idx} className="text-gray-400">
+                          <TextReveal text={line.content} delay={0} charDelay={0.04} />
+                        </div>
                       ))}
                       {loginStep < loginLines.length && (
                         <div className="inline-flex items-center">
@@ -319,7 +367,13 @@ const Hero = () => {
                     return lineType === 'pre' ? (
                       <pre key={index} className="text-gray-300 text-xs md:text-sm leading-tight my-2">{line}</pre>
                     ) : (
-                      <div key={index} className={`${getLineStyle(line, index)} transition-colors duration-200`}>
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className={`${getLineStyle(line, index)} transition-colors duration-200`}
+                      >
                         {isCommand ? (
                           <>
                             <span className="text-[#c8a97e] mr-2">$</span>
@@ -333,7 +387,7 @@ const Hero = () => {
                         ) : (
                           line
                         )}
-                      </div>
+                      </motion.div>
                     );
                   })}
                   {isComplete && (

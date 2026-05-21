@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, FolderOpen, PlayCircle, Eye, X, BookOpen } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import TiltCard from './TiltCard';
+import MagneticButton from './MagneticButton';
 
 const veloraReadme = `
 # Velora - Market Intel Platform (Inter IIT Tech Meet 14.0)
@@ -131,9 +133,15 @@ const Projects = () => {
   return (
     <section id="projects" className="min-h-screen py-20 relative z-10 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4">
-        <h2 className="section-heading">
+        <motion.h2
+          className="section-heading"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
           <span className="text-[#c8a97e] font-mono text-2xl mr-2">03.</span> Featured Projects
-        </h2>
+        </motion.h2>
 
         {/* Media Zone */}
         <div className="mb-12 rounded-2xl overflow-hidden border border-white/10 bg-[#0b0c10]/50 backdrop-blur-sm aspect-video max-h-[500px] relative w-full shadow-2xl flex items-center justify-center">
@@ -174,17 +182,18 @@ const Projects = () => {
         {/* Category Filter */}
         <div className="flex flex-wrap gap-4 mb-12">
           {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide border ${activeCategory === category
-                ? "bg-[#c8a97e]/15 text-[#d4b896] border-[#c8a97e]/30"
-                : "bg-white/[0.03] text-white/50 hover:text-white/80 border-white/10 hover:bg-white/[0.06] hover:border-white/20"
-                }`}
-              style={{ transition: 'all 0.3s ease' }}
-            >
-              {category}
-            </button>
+            <MagneticButton key={category} strength={0.25} radius={50}>
+              <button
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide border ${activeCategory === category
+                  ? "bg-[#c8a97e]/15 text-[#d4b896] border-[#c8a97e]/30"
+                  : "bg-white/[0.03] text-white/50 hover:text-white/80 border-white/10 hover:bg-white/[0.06] hover:border-white/20"
+                  }`}
+                style={{ transition: 'all 0.3s ease' }}
+              >
+                {category}
+              </button>
+            </MagneticButton>
           ))}
         </div>
 
@@ -203,63 +212,75 @@ const Projects = () => {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                whileHover="hover"
-                className={`group h-full cursor-pointer transition-all duration-300 ${selectedProject.title === project.title ? 'ring-2 ring-[#c8a97e]/50 ring-offset-4 ring-offset-[#0b0c10]' : ''
-                  }`}
-                onClick={() => setActionPromptProject(project)}
+                className="h-full"
               >
-                <div className="glass-card h-full flex flex-col p-8 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#c8a97e]/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.4s ease' }} />
+                <TiltCard
+                  className={`tilt-card-wrapper group h-full cursor-pointer transition-all duration-300 relative ${selectedProject.title === project.title ? 'ring-2 ring-[#c8a97e]/50 ring-offset-4 ring-offset-[#0b0c10]' : ''
+                    }`}
+                  tiltMax={7}
+                  glareEnabled={true}
+                  scale={1.03}
+                >
+                  <div
+                    className="glass-card h-full flex flex-col p-8 relative overflow-hidden"
+                    onClick={() => setActionPromptProject(project)}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#c8a97e]/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.4s ease' }} />
 
-                  {/* Top Bar */}
-                  <div className="flex justify-between items-center mb-8 relative z-10">
-                    <div className="p-3 rounded-xl bg-[#c8a97e]/10 text-[#c8a97e]/70" style={{ transition: 'background 0.3s ease' }}>
-                      <FolderOpen className="w-8 h-8" />
+                    {/* Top Bar */}
+                    <div className="flex justify-between items-center mb-8 relative z-10">
+                      <div className="p-3 rounded-xl bg-[#c8a97e]/10 text-[#c8a97e]/70 group-hover:bg-[#c8a97e]/15" style={{ transition: 'background 0.3s ease' }}>
+                        <FolderOpen className="w-8 h-8" />
+                      </div>
+
+                      <div className="flex gap-4 items-center">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (project.actionType === 'external') {
+                              window.open(project.actionUrl, '_blank');
+                            } else {
+                              setModalProject(project);
+                            }
+                          }}
+                          className="text-white/30 hover:text-[#c8a97e] flex items-center gap-2 text-sm font-medium transition-colors"
+                        >
+                          {project.actionType === 'external' ? (
+                            <><ExternalLink className="w-5 h-5" /> Visit Site</>
+                          ) : (
+                            <><BookOpen className="w-5 h-5" /> Read More</>
+                          )}
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex gap-4 items-center">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (project.actionType === 'external') {
-                            window.open(project.actionUrl, '_blank');
-                          } else {
-                            setModalProject(project);
-                          }
-                        }}
-                        className="text-white/30 hover:text-[#c8a97e] flex items-center gap-2 text-sm font-medium transition-colors"
-                      >
-                        {project.actionType === 'external' ? (
-                          <><ExternalLink className="w-5 h-5" /> Visit Site</>
-                        ) : (
-                          <><BookOpen className="w-5 h-5" /> Read More</>
-                        )}
-                      </button>
+                    {/* Content */}
+                    <div className="flex-grow relative z-10">
+                      <h3 className="text-xl font-bold text-white/90 mb-3 group-hover:text-[#d4b896]" style={{ transition: 'color 0.3s ease' }}>
+                        {project.title}
+                      </h3>
+                      {/* Summary reveal on hover */}
+                      <div className="overflow-hidden">
+                        <p className="text-white/50 text-sm leading-relaxed mb-6 transition-all duration-500 group-hover:text-white/70">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5 relative z-10">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs font-mono text-[#c8a97e]/50 bg-white/[0.03] px-2 py-1 rounded-md border border-white/10 group-hover:text-[#c8a97e]/70 group-hover:border-[#c8a97e]/15"
+                          style={{ transition: 'all 0.3s ease' }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-grow relative z-10">
-                    <h3 className="text-xl font-bold text-white/90 mb-3 group-hover:text-[#d4b896]" style={{ transition: 'color 0.3s ease' }}>
-                      {project.title}
-                    </h3>
-                    <p className="text-white/50 text-sm leading-relaxed mb-6">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5 relative z-10">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs font-mono text-[#c8a97e]/50 bg-white/[0.03] px-2 py-1 rounded-md border border-white/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -272,17 +293,19 @@ const Projects = () => {
           viewport={{ once: true }}
           className="mt-16 text-center relative z-10"
         >
-          <a
-            href="https://github.com/Omesh2004"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white/[0.04] border border-white/10 rounded-full text-white/60 hover:text-[#c8a97e] hover:bg-white/[0.06] hover:border-[#c8a97e]/20 group font-medium"
-            style={{ transition: 'all 0.3s ease' }}
-          >
-            <Github className="w-5 h-5" />
-            <span>View More on GitHub</span>
-            <span className="opacity-0 group-hover:opacity-100 text-[#c8a97e]/60" style={{ transition: 'opacity 0.3s ease' }}>→</span>
-          </a>
+          <MagneticButton className="inline-block" strength={0.4} radius={100}>
+            <a
+              href="https://github.com/Omesh2004"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white/[0.04] border border-white/10 rounded-full text-white/60 hover:text-[#c8a97e] hover:bg-white/[0.06] hover:border-[#c8a97e]/20 group font-medium"
+              style={{ transition: 'all 0.3s ease' }}
+            >
+              <Github className="w-5 h-5" />
+              <span>View More on GitHub</span>
+              <span className="opacity-0 group-hover:opacity-100 text-[#c8a97e]/60" style={{ transition: 'opacity 0.3s ease' }}>→</span>
+            </a>
+          </MagneticButton>
         </motion.div>
       </div>
 
