@@ -111,7 +111,7 @@ const CustomCursor: React.FC = () => {
       {/* Outer ring - smooth follow */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 0.3s ease',

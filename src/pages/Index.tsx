@@ -10,10 +10,11 @@ import MatrixBackground from "../components/MatrixBackground";
 import SideNav from "../components/SideNav";
 import CustomCursor from "../components/CustomCursor";
 import ParallaxDivider from "../components/ParallaxDivider";
+import ParallaxWrapper from "../components/ParallaxWrapper";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black relative">
+    <div className="min-h-screen bg-background relative transition-colors duration-300">
       <MatrixBackground />
       <CustomCursor />
       <SideNav />
@@ -21,26 +22,33 @@ const Index = () => {
         <Hero />
         <ParallaxDivider speed={0.3} variant="gold" />
         <section id="about" className="min-h-screen flex items-center justify-center py-16">
-          <About />
+          <ParallaxWrapper offset={40} className="w-full">
+            <About />
+          </ParallaxWrapper>
         </section>
         <ParallaxDivider speed={0.2} variant="teal" />
         <section id="experience" className="min-h-screen flex items-center justify-center py-16">
-          <Experience />
+          <ParallaxWrapper offset={60} className="w-full">
+            <Experience />
+          </ParallaxWrapper>
         </section>
         <ParallaxDivider speed={0.35} variant="purple" />
         <section id="projects" className="min-h-screen flex items-center justify-center py-16">
-          <Projects />
+          <ParallaxWrapper offset={50} className="w-full">
+            <Projects />
+          </ParallaxWrapper>
         </section>
         <ParallaxDivider speed={0.25} variant="gold" />
         <section id="achievements" className="min-h-screen flex items-center justify-center py-16">
-          <Achievements />
+          <ParallaxWrapper offset={45} className="w-full">
+            <Achievements />
+          </ParallaxWrapper>
         </section>
         <ParallaxDivider speed={0.2} variant="teal" />
-        {/* <section id="skills" className="min-h-screen flex items-center justify-center py-16">
-          <Skills />
-        </section> */}
         <section id="contact" className="min-h-screen flex items-center justify-center py-16">
-          <Contact />
+          <ParallaxWrapper offset={30} className="w-full">
+            <Contact />
+          </ParallaxWrapper>
         </section>
       </div>
     </div>

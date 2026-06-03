@@ -105,7 +105,7 @@ const Experience = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <span className="text-[#c8a97e] font-mono text-2xl mr-2">02.</span> Certificates & Real World Projects
+          <span className="text-accent-gold-light font-mono text-2xl mr-2">02.</span> Certificates & Real World Projects
         </motion.h2>
 
         <motion.div
@@ -128,18 +128,18 @@ const Experience = () => {
                 initial={index % 2 === 0 ? 'hiddenLeft' : 'hiddenRight'}
                 whileInView="visible"
                 viewport={{ once: true, margin: "-40px" }}
-                className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 bg-white/[0.03] border border-white/10 rounded-xl p-6 relative overflow-hidden group"
+                className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 bg-foreground/[0.03] border border-border rounded-xl p-6 relative overflow-hidden group"
                 style={{ transition: 'background 0.4s ease, border-color 0.4s ease' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c8a97e]/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.4s ease' }} />
                 
                 {/* Timeline dot */}
-                <div className="absolute -left-[3px] md:left-[42px] top-8 w-[7px] h-[7px] rounded-full bg-[#c8a97e]/50 border border-[#c8a97e]/30 hidden lg:block" style={{ transition: 'background 0.3s ease' }} />
+                <div className="absolute -left-[3px] md:left-[42px] top-8 w-[7px] h-[7px] rounded-full bg-accent-gold-light/50 border border-accent-gold-light/30 hidden lg:block" style={{ transition: 'background 0.3s ease' }} />
 
                 {/* Image */}
                 <div className="flex items-start justify-center lg:justify-start">
                   <div 
-                    className="w-full aspect-video lg:aspect-square lg:h-48 bg-[#0d0e12]/50 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 cursor-pointer group/img"
+                    className="w-full aspect-video lg:aspect-square lg:h-48 bg-background/50 rounded-xl border border-border flex items-center justify-center overflow-hidden flex-shrink-0 cursor-pointer group/img"
                     style={{ transition: 'border-color 0.4s ease' }}
                     onClick={() => setModalImage(exp.image)}
                   >
@@ -153,7 +153,7 @@ const Experience = () => {
                         const parent = e.currentTarget.parentElement;
                         if (parent) {
                           parent.innerHTML = `
-                            <div class="flex flex-col items-center justify-center text-white/40 p-4">
+                            <div class="flex flex-col items-center justify-center text-foreground/40 p-4">
                               <span class="text-sm text-center font-medium">Image not found</span>
                             </div>
                           `;
@@ -168,23 +168,23 @@ const Experience = () => {
                   {/* Header */}
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                     <div className="flex-grow min-w-0">
-                      <h3 className="text-2xl font-bold text-[#d4b896] mb-2">
+                      <h3 className="text-2xl font-bold text-accent-gold mb-2">
                         {exp.title}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-2 text-white/100 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 text-foreground mb-2">
                         <span className="font-bold text-lg tracking-wide">{exp.company}</span>
                         {exp.location && (
                           <>
-                            <span className="text-white/30">•</span>
-                            <span className="flex items-center gap-1 text-white/50 text-sm">
-                              <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#c8a97e]/70" />
+                            <span className="text-foreground/30">•</span>
+                            <span className="flex items-center gap-1 text-foreground/50 text-sm">
+                              <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-accent-gold-light/70" />
                               {exp.location}
                             </span>
                           </>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-[#c8a97e]/80 text-sm bg-[#c8a97e]/8 px-4 py-2 rounded-full border border-[#c8a97e]/15 flex-shrink-0">
+                    <div className="flex items-center gap-2 text-accent-gold-light/80 text-sm bg-accent-gold-light/8 px-4 py-2 rounded-full border border-accent-gold-light/15 flex-shrink-0">
                       <Calendar className="w-4 h-4" />
                       {exp.period}
                     </div>
@@ -193,8 +193,8 @@ const Experience = () => {
                   {/* Description */}
                   <ul className="space-y-3 mb-6">
                     {exp.description.map((item, idx) => (
-                      <li key={idx} className="text-white/60 flex items-start gap-3">
-                        <span className="text-[#c8a97e]/60 mt-1 flex-shrink-0">
+                      <li key={idx} className="text-foreground/60 flex items-start gap-3">
+                        <span className="text-accent-gold-light/60 mt-1 flex-shrink-0">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12L10 17L20 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
@@ -209,7 +209,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 bg-white/[0.04] text-[#c8a97e]/70 text-xs font-medium tracking-wider uppercase rounded-full border border-white/10 cursor-default hover:bg-white/[0.08] hover:border-[#c8a97e]/20"
+                        className="px-3 py-1.5 bg-foreground/[0.04] text-accent-gold-light/70 text-xs font-medium tracking-wider uppercase rounded-full border border-border cursor-default hover:bg-foreground/[0.08] hover:border-accent-gold-light/20"
                         style={{ transition: 'background 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}
                       >
                         {tech}
@@ -226,7 +226,7 @@ const Experience = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex items-center justify-center gap-2 text-white/30 text-sm pt-4"
+              className="flex items-center justify-center gap-2 text-foreground/30 text-sm pt-4"
             >
               <Award className="w-4 h-4" />
               <span>{experiences.length} Highlights • Continuously learning and growing</span>
@@ -237,8 +237,8 @@ const Experience = () => {
 
       {/* Modal for image preview */}
       {modalImage && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={() => setModalImage(null)}>
-          <img src={modalImage} alt="Preview" className="max-w-full max-h-[90vh] object-contain rounded-2xl border border-white/10" />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm p-4" onClick={() => setModalImage(null)}>
+          <img src={modalImage} alt="Preview" className="max-w-full max-h-[90vh] object-contain rounded-2xl border border-border" />
         </div>
       )}
     </section>

@@ -98,7 +98,7 @@ const Achievements = () => {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <span className="text-[#c8a97e] font-mono text-2xl mr-2">04.</span> Achievements
+        <span className="text-accent-gold-light font-mono text-2xl mr-2">04.</span> Achievements
       </motion.h2>
 
       <motion.div
@@ -118,25 +118,25 @@ const Achievements = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center hover:border-[#c8a97e]/15"
+              className="bg-foreground/[0.03] rounded-xl border border-border p-6 flex items-center hover:border-accent-gold-light/15"
               style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
             >
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center gap-3 mb-2">
                   <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode" className="w-8 h-8 rounded" />
-                  <span className="text-[#d4b896] font-bold text-xl">LeetCode</span>
+                  <span className="text-accent-gold font-bold text-xl">LeetCode</span>
                 </div>
-                <div className="flex flex-wrap gap-6 text-white/70 text-sm mt-2">
+                <div className="flex flex-wrap gap-6 text-foreground/70 text-sm mt-2">
                   <div>
-                    <span className="block text-xs text-white/40">Problems Solved</span>
-                    <span className="font-bold text-2xl text-[#c8a97e]"><AnimatedCounter value="150" suffix="+" /></span>
+                    <span className="block text-xs text-foreground/40">Problems Solved</span>
+                    <span className="font-bold text-2xl text-accent-gold-light"><AnimatedCounter value="150" suffix="+" /></span>
                   </div>
                   <div>
-                    <span className="block text-xs text-white/40">Focus Areas</span>
-                    <span className="font-bold text-lg text-[#d4b896]">DSA & Algorithms</span>
+                    <span className="block text-xs text-foreground/40">Focus Areas</span>
+                    <span className="font-bold text-lg text-accent-gold">DSA & Algorithms</span>
                   </div>
                 </div>
-                <span className="mt-4 text-[#c8a97e]/60 text-sm font-medium">
+                <span className="mt-4 text-accent-gold-light/60 text-sm font-medium">
                   Consistent problem solver
                 </span>
               </div>
@@ -147,17 +147,17 @@ const Achievements = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white/[0.03] rounded-xl border border-white/10 p-6 flex items-center hover:border-[#a89bc8]/15"
+              className="bg-foreground/[0.03] rounded-xl border border-border p-6 flex items-center hover:border-[#a89bc8]/15"
               style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
             >
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-8 h-8 rounded bg-gradient-to-br from-[#8b7ec8]/40 to-[#6b5fa8]/40 flex items-center justify-center">
-                    <Trophy className="w-5 h-5 text-white/70" />
+                    <Trophy className="w-5 h-5 text-foreground/70" />
                   </div>
-                  <span className="text-[#a89bc8] font-bold text-xl">Extra-Curriculars</span>
+                  <span className="text-accent-purple font-bold text-xl">Extra-Curriculars</span>
                 </div>
-                <div className="flex flex-col gap-3 text-white/60 text-sm mt-2">
+                <div className="flex flex-col gap-3 text-foreground/60 text-sm mt-2">
                   <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -165,7 +165,7 @@ const Achievements = () => {
                     transition={{ delay: 0.3 }}
                     className="flex items-start gap-2"
                   >
-                    <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-accent-purple/60 mt-0.5" />
                     <span>Coordinator, Development and OS Division, NJACK (2025)</span>
                   </motion.div>
                   <motion.div
@@ -175,7 +175,7 @@ const Achievements = () => {
                     transition={{ delay: 0.4 }}
                     className="flex items-start gap-2"
                   >
-                    <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-accent-purple/60 mt-0.5" />
                     <span>Sub-Coordinator, Events Committee, Infinito Sports Fest (2024)</span>
                   </motion.div>
                   <motion.div
@@ -185,7 +185,7 @@ const Achievements = () => {
                     transition={{ delay: 0.5 }}
                     className="flex items-start gap-2"
                   >
-                    <CheckCircle className="w-4 h-4 text-[#a89bc8]/60 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-accent-purple/60 mt-0.5" />
                     <span>Table Tennis Inter IIT Sports (2023)</span>
                   </motion.div>
                 </div>
@@ -194,8 +194,8 @@ const Achievements = () => {
           </div>
 
           {/* Hackathons & Competitions */}
-          <h3 className="text-2xl font-bold text-[#d4b896] mb-6 flex items-center gap-3 mt-8">
-            <Trophy className="w-6 h-6 text-[#c8a97e]/70" />
+          <h3 className="text-2xl font-bold text-accent-gold mb-6 flex items-center gap-3 mt-8">
+            <Trophy className="w-6 h-6 text-accent-gold-light/70" />
             <span>Competitions & Hackathons</span>
           </h3>
           
@@ -208,11 +208,11 @@ const Achievements = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden flex flex-col group hover:border-[#c8a97e]/15"
+                className="bg-foreground/[0.03] border border-border rounded-xl overflow-hidden flex flex-col group hover:border-accent-gold-light/15"
                 style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
               >
                 <button
-                  className="focus:outline-none overflow-hidden h-48 w-full relative bg-[#0d0e12]"
+                  className="focus:outline-none overflow-hidden h-48 w-full relative bg-background"
                   onClick={() => setModalImage(ach.image)}
                   tabIndex={0}
                   aria-label={`View image for ${ach.title}`}
@@ -227,7 +227,7 @@ const Achievements = () => {
                       const parent = e.currentTarget.parentElement;
                       if (parent) {
                         parent.innerHTML = `
-                          <div class="flex flex-col items-center justify-center h-full text-white/25 p-4">
+                          <div class="flex flex-col items-center justify-center h-full text-foreground/25 p-4">
                             <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -239,9 +239,9 @@ const Achievements = () => {
                   />
                 </button>
                 <div className="p-5 flex flex-col flex-1">
-                  <div className="text-xs text-[#c8a97e]/60 font-medium mb-2">{ach.date}</div>
-                  <div className="font-bold text-white/90 text-lg mb-2">{ach.title}</div>
-                  <div className="text-white/50 text-sm flex-1 leading-relaxed">{ach.description}</div>
+                  <div className="text-xs text-accent-gold-light/60 font-medium mb-2">{ach.date}</div>
+                  <div className="font-bold text-foreground/90 text-lg mb-2">{ach.title}</div>
+                  <div className="text-foreground/50 text-sm flex-1 leading-relaxed">{ach.description}</div>
                 </div>
               </motion.div>
             ))}
@@ -251,8 +251,8 @@ const Achievements = () => {
 
       {/* Modal for image preview */}
       {modalImage && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setModalImage(null)}>
-          <img src={modalImage} alt="Achievement" className="max-w-[90vw] max-h-[90vh] rounded-2xl border border-white/10" />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm" onClick={() => setModalImage(null)}>
+          <img src={modalImage} alt="Achievement" className="max-w-[90vw] max-h-[90vh] rounded-2xl border border-border" />
         </div>
       )}
     </div>

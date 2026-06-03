@@ -59,7 +59,7 @@ const About = () => {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <span className="text-[#c8a97e] font-mono text-2xl mr-2">01.</span> About Me
+        <span className="text-accent-gold-light font-mono text-2xl mr-2">01.</span> About Me
       </motion.h2>
 
       <motion.div
@@ -81,7 +81,7 @@ const About = () => {
             >
               {/* Text Content */}
               <motion.div variants={staggerItem}>
-                <p className="text-white/100 leading-relaxed text-lg">
+                <p className="text-foreground leading-relaxed text-lg">
                   I'm a passionate Chemical Engineering student at IIT Patna, focused on building innovative tech solutions. 
                   My journey in technology has been driven by a deep curiosity for how things work and a desire to create 
                   meaningful impact through code.
@@ -90,49 +90,49 @@ const About = () => {
 
               <div className="space-y-6">
                 <motion.div variants={staggerItem} className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-xl bg-[#c8a97e]/10 border border-[#c8a97e]/10 shrink-0 group-hover:border-[#c8a97e]/30" style={{ transition: 'border-color 0.3s ease' }}>
-                    <GraduationCap className="w-6 h-6 text-[#c8a97e]/70" />
+                  <div className="p-3 rounded-xl bg-accent-gold-light/10 border border-accent-gold-light/10 shrink-0 group-hover:border-accent-gold-light/30" style={{ transition: 'border-color 0.3s ease' }}>
+                    <GraduationCap className="w-6 h-6 text-accent-gold-light/70" />
                   </div>
                   <div>
-                    <h3 className="text-white/90 font-bold text-lg">Education</h3>
-                    <p className="text-white/60">B.Tech in Chemical Engineering</p>
-                    <p className="text-[#c8a97e]/60 text-sm mt-1 font-medium">Indian Institute of Technology Patna | 2023-2027</p>
+                    <h3 className="text-foreground/90 font-bold text-lg">Education</h3>
+                    <p className="text-foreground/60">B.Tech in Chemical Engineering</p>
+                    <p className="text-accent-gold-light/60 text-sm mt-1 font-medium">Indian Institute of Technology Patna | 2023-2027</p>
                   </div>
                 </motion.div>
 
                 <motion.div variants={staggerItem} className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-xl bg-[#c8a97e]/10 border border-[#c8a97e]/10 shrink-0 group-hover:border-[#c8a97e]/30" style={{ transition: 'border-color 0.3s ease' }}>
-                    <Code2 className="w-6 h-6 text-[#c8a97e]/70" />
+                  <div className="p-3 rounded-xl bg-accent-gold-light/10 border border-accent-gold-light/10 shrink-0 group-hover:border-accent-gold-light/30" style={{ transition: 'border-color 0.3s ease' }}>
+                    <Code2 className="w-6 h-6 text-accent-gold-light/70" />
                   </div>
                   <div>
-                    <h3 className="text-white/90 font-bold text-lg">Technical Focus</h3>
+                    <h3 className="text-foreground/90 font-bold text-lg">Technical Focus</h3>
                     <div className="flex flex-wrap gap-2 mt-3">
                       {['Full Stack Development', 'Machine Learning', 'Data Processing', 'DevOps'].map((skill) => (
-                        <span key={skill} className="px-4 py-1.5 bg-white/[0.04] text-[#c8a97e]/70 rounded-full text-xs font-medium border border-white/10 cursor-default hover:bg-white/[0.08] hover:border-[#c8a97e]/20" style={{ transition: 'all 0.3s ease' }}>{skill}</span>
+                        <span key={skill} className="px-4 py-1.5 bg-foreground/5 text-accent-gold-light/70 rounded-full text-xs font-medium border border-border cursor-default hover:bg-foreground/10 hover:border-accent-gold-light/20" style={{ transition: 'all 0.3s ease' }}>{skill}</span>
                       ))}
                     </div>
                   </div>
                 </motion.div>
 
                 <motion.div variants={staggerItem} className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-xl bg-[#c8a97e]/10 border border-[#c8a97e]/10 shrink-0 group-hover:border-[#c8a97e]/30" style={{ transition: 'border-color 0.3s ease' }}>
-                    <Briefcase className="w-6 h-6 text-[#c8a97e]/70" />
+                  <div className="p-3 rounded-xl bg-accent-gold-light/10 border border-accent-gold-light/10 shrink-0 group-hover:border-accent-gold-light/30" style={{ transition: 'border-color 0.3s ease' }}>
+                    <Briefcase className="w-6 h-6 text-accent-gold-light/70" />
                   </div>
                   <div>
-                    <h3 className="text-white/90 font-bold text-lg">Experience</h3>
-                    <p className="text-white/60">Lead Full Stack Developer</p>
-                    <p className="text-[#c8a97e]/60 text-sm mt-1 font-medium">IIT Patna Official Website | Jan 2026 - Present</p>
+                    <h3 className="text-foreground/90 font-bold text-lg">Experience</h3>
+                    <p className="text-foreground/60">Lead Full Stack Developer</p>
+                    <p className="text-accent-gold-light/60 text-sm mt-1 font-medium">IIT Patna Official Website | Jan 2026 - Present</p>
                   </div>
                 </motion.div>
 
                 <motion.div variants={staggerItem} className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-xl bg-[#c8a97e]/10 border border-[#c8a97e]/10 shrink-0 group-hover:border-[#c8a97e]/30" style={{ transition: 'border-color 0.3s ease' }}>
-                    <BookOpen className="w-6 h-6 text-[#c8a97e]/70" />
+                  <div className="p-3 rounded-xl bg-accent-gold-light/10 border border-accent-gold-light/10 shrink-0 group-hover:border-accent-gold-light/30" style={{ transition: 'border-color 0.3s ease' }}>
+                    <BookOpen className="w-6 h-6 text-accent-gold-light/70" />
                   </div>
                   <div>
-                    <h3 className="text-white/90 font-bold text-lg">Key Projects</h3>
-                    <p className="text-white/60">Velora - Market Intel Platform</p>
-                    <p className="text-[#c8a97e]/60 text-sm mt-1 font-medium">Nov 2025 - Dec 2025</p>
+                    <h3 className="text-foreground/90 font-bold text-lg">Key Projects</h3>
+                    <p className="text-foreground/60">Velora - Market Intel Platform</p>
+                    <p className="text-accent-gold-light/60 text-sm mt-1 font-medium">Nov 2025 - Dec 2025</p>
                   </div>
                 </motion.div>
               </div>
@@ -156,7 +156,7 @@ const About = () => {
                     className="w-full h-full object-cover group-hover:scale-[1.04]"
                     style={{ transition: 'transform 0.6s ease' }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-transparent to-transparent opacity-70" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-70" />
                 </div>
               </div>
             </motion.div>

@@ -10,6 +10,7 @@ import {
   Laptop
 } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
@@ -60,19 +61,20 @@ const SideNav = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="fixed top-4 right-4 z-50"
+        className="fixed top-4 right-4 z-50 flex items-center gap-4"
       >
+        <ThemeToggle />
         <MagneticButton strength={0.4} radius={80}>
           <motion.button
             onClick={handleResumeClick}
-            className="relative flex items-center gap-3 px-6 py-3 bg-white/[0.04] rounded-full border border-white/10 text-[#c8a97e]/70 group"
-            style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}
+            className="relative flex items-center gap-3 px-6 py-3 rounded-full group glass-card"
+            style={{ padding: '0.75rem 1.5rem', transition: 'background 0.3s ease, border-color 0.3s ease' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="absolute inset-0 bg-[#c8a97e]/5 rounded-full opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.3s ease' }} />
+            <div className="absolute inset-0 bg-primary/5 rounded-full opacity-0 group-hover:opacity-100" style={{ transition: 'opacity 0.3s ease' }} />
             <div className="relative">
-              <FileText className="w-5 h-5 group-hover:text-amber-300 transition-colors" />
+              <FileText className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
             </div>
             <span className="text-base font-medium relative" style={{ transition: 'color 0.3s ease' }}>
               Resume
@@ -103,8 +105,8 @@ const SideNav = () => {
                 onHoverEnd={() => setHoveredItem(null)}
                 className={`group relative flex items-center gap-4 p-3 rounded-xl ${
                   isActive 
-                    ? 'text-[#c8a97e] bg-white/[0.06] border border-white/10' 
-                    : 'text-white/30 border border-transparent hover:text-[#c8a97e]/70 hover:bg-white/[0.03]'
+                    ? 'text-primary bg-foreground/5 border border-border' 
+                    : 'text-foreground/30 border border-transparent hover:text-primary/70 hover:bg-foreground/5'
                 }`}
                 style={{ transition: 'all 0.3s ease' }}
                 whileHover={{ scale: 1.05 }}
@@ -115,7 +117,7 @@ const SideNav = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-[#c8a97e]/50 rounded-xl"
+                      className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-primary/50 rounded-xl"
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
                   )}
@@ -157,7 +159,7 @@ const SideNav = () => {
         className="fixed bottom-0 left-0 right-0 z-50 md:hidden pb-safe"
       >
         <div className="mx-4 mb-4">
-          <div className="bg-[#0d0e12]/80 rounded-2xl p-2 flex justify-around items-center border border-white/10">
+          <div className="glass-card rounded-2xl p-2 flex justify-around items-center">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -168,8 +170,8 @@ const SideNav = () => {
                   onClick={() => scrollToSection(item.id)}
                   className={`relative p-3 rounded-xl ${
                     isActive 
-                      ? 'text-[#c8a97e] bg-white/[0.06]' 
-                      : 'text-white/30 hover:text-[#c8a97e]/70 hover:bg-white/[0.03]'
+                      ? 'text-primary bg-foreground/5' 
+                      : 'text-foreground/30 hover:text-primary/70 hover:bg-foreground/5'
                   }`}
                   style={{ transition: 'all 0.3s ease' }}
                   whileTap={{ scale: 0.95 }}
@@ -179,7 +181,7 @@ const SideNav = () => {
                     {isActive && (
                       <motion.div
                         layoutId="mobileActiveIndicator"
-                        className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-[#c8a97e]/50 rounded-xl"
+                        className="absolute -left-1.5 -right-1.5 -top-1.5 -bottom-1.5 border border-primary/50 rounded-xl"
                         transition={{ duration: 0.3, ease: "easeOut" }}
                       />
                     )}

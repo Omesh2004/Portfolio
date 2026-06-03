@@ -89,7 +89,7 @@ const MatrixAnimation = () => {
   }, []);
 
   return (
-    <pre className="text-[#c8a97e]/60 text-xs md:text-sm leading-tight my-8 min-h-[120px] font-mono text-center select-none">
+    <pre className="text-accent-gold-light/60 text-xs md:text-sm leading-tight my-8 min-h-[120px] font-mono text-center select-none">
       {matrix.map((row, i) => (
         <div key={i} style={{ letterSpacing: 2 }}>
           {row.join(' ')}
@@ -201,19 +201,19 @@ const Hero = () => {
     const type = terminalContent[index]?.type;
     switch (type) {
       case 'command':
-        return 'text-[#c8a97e] font-semibold';
+        return 'text-accent-gold-light font-semibold';
       case 'output':
-        return 'text-white/60';
+        return 'text-foreground/60';
       case 'success':
-        return 'text-[#d4b896]';
+        return 'text-amber-600 dark:text-accent-gold';
       case 'system':
-        return 'text-[#a89bc8] font-semibold';
+        return 'text-purple-600 dark:text-accent-purple font-semibold';
       case 'pre':
-        return 'text-white/60';
+        return 'text-foreground/60';
       case 'login':
-        return 'text-white/40';
+        return 'text-foreground/40';
       default:
-        return 'text-white/60';
+        return 'text-foreground/60';
     }
   };
 
@@ -323,9 +323,9 @@ const Hero = () => {
             <div className="flex items-center gap-2">
             <div className="terminal-circle text-rose-400/60 bg-rose-400/60"></div>
               <div className="terminal-circle text-amber-400/60 bg-amber-400/60"></div>
-              <div className="terminal-circle text-[#c8a97e]/60 bg-[#c8a97e]/60"></div>
+              <div className="terminal-circle text-accent-gold-light/60 bg-accent-gold-light/60"></div>
             </div>
-            <div className="text-xs text-center flex-1 text-white/60 font-mono">
+            <div className="text-xs text-center flex-1 text-foreground/60 font-mono">
               omesh@mystic: ~/portfolio
             </div>
           </div>
@@ -338,7 +338,7 @@ const Hero = () => {
                   {phase === 'login' && (
                     <>
                       {loginLines.slice(0, loginStep).map((line, idx) => (
-                        <div key={idx} className="text-gray-400">
+                        <div key={idx} className="text-muted-foreground">
                           <TextReveal text={line.content} delay={0} charDelay={0.04} />
                         </div>
                       ))}
@@ -365,7 +365,7 @@ const Hero = () => {
                     const lineType = isCommand ? 'command' : lineContent?.type;
                     
                     return lineType === 'pre' ? (
-                      <pre key={index} className="text-gray-300 text-xs md:text-sm leading-tight my-2">{line}</pre>
+                      <pre key={index} className="text-foreground/80 text-xs md:text-sm leading-tight my-2">{line}</pre>
                     ) : (
                       <motion.div
                         key={index}
@@ -376,12 +376,12 @@ const Hero = () => {
                       >
                         {isCommand ? (
                           <>
-                            <span className="text-[#c8a97e] mr-2">$</span>
+                            <span className="text-accent-gold-light mr-2">$</span>
                             {line.slice(2)}
                           </>
                         ) : lineType === 'command' ? (
                           <>
-                            <span className="text-[#c8a97e] mr-2">$</span>
+                            <span className="text-accent-gold-light mr-2">$</span>
                             {line}
                           </>
                         ) : (
@@ -392,7 +392,7 @@ const Hero = () => {
                   })}
                   {isComplete && (
                     <div className="inline-flex items-center gap-2">
-                      <span className="text-[#c8a97e]">$</span>
+                      <span className="text-accent-gold-light">$</span>
                       <div className="flex-grow relative">
                         <div className="relative">
                           <input
@@ -402,15 +402,15 @@ const Hero = () => {
                             onChange={(e) => setUserInput(e.target.value)}
                             onKeyDown={handleKeyDown}
                             className={`bg-transparent outline-none w-full relative z-10 ${
-                              suggestions.length > 0 ? 'text-transparent' : 'text-[#c8a97e]'
+                              suggestions.length > 0 ? 'text-transparent' : 'text-accent-gold-light'
                             }`}
                             placeholder=""
                             autoFocus
                           />
                           {/* Inline suggestion - lighter text overlaid */}
                           {suggestions.length > 0 && (
-                            <div className="absolute top-0 left-0 text-white/40 pointer-events-none font-mono text-sm">
-                              <span className="text-[#c8a97e]">{userInput}</span>
+                            <div className="absolute top-0 left-0 text-foreground/40 pointer-events-none font-mono text-sm">
+                              <span className="text-accent-gold-light">{userInput}</span>
                               <span>{suggestions[0].name.slice(userInput.length)}</span>
                             </div>
                           )}
@@ -427,8 +427,8 @@ const Hero = () => {
             </div>
 
             {phase === 'terminal' && isComplete && (
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <div className="text-center text-white/40 text-xs">
+              <div className="mt-4 pt-4 border-t border-border">
+                <div className="text-center text-foreground/40 text-xs">
                   Type 'help' for available commands
                 </div>
               </div>

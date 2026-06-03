@@ -65,7 +65,7 @@ const Navbar = () => {
             {/* Logo */}
             <motion.button
               onClick={scrollToTop}
-              className="flex items-center gap-2 text-[#c8a97e]/70 font-mono group"
+              className="flex items-center gap-2 text-accent-gold-light/70 font-mono group"
               style={{ transition: 'color 0.3s ease' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

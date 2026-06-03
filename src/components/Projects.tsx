@@ -140,11 +140,11 @@ const Projects = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <span className="text-[#c8a97e] font-mono text-2xl mr-2">03.</span> Featured Projects
+          <span className="text-accent-gold-light font-mono text-2xl mr-2">03.</span> Featured Projects
         </motion.h2>
 
         {/* Media Zone */}
-        <div className="mb-12 rounded-2xl overflow-hidden border border-white/10 bg-[#0b0c10]/50 backdrop-blur-sm aspect-video max-h-[500px] relative w-full shadow-2xl flex items-center justify-center">
+        <div className="mb-12 rounded-2xl overflow-hidden border border-border bg-background/50 backdrop-blur-sm aspect-video max-h-[500px] relative w-full shadow-2xl flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProject.title}
@@ -174,8 +174,8 @@ const Projects = () => {
             </motion.div>
           </AnimatePresence>
           <div className="absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-10">
-            <h3 className="text-2xl font-bold text-white/90">{selectedProject.title}</h3>
-            <p className="text-[#c8a97e] font-mono text-sm mt-2">{selectedProject.tech.slice(0, 3).join(' • ')}</p>
+            <h3 className="text-2xl font-bold text-foreground/90">{selectedProject.title}</h3>
+            <p className="text-accent-gold-light font-mono text-sm mt-2">{selectedProject.tech.slice(0, 3).join(' • ')}</p>
           </div>
         </div>
 
@@ -186,8 +186,8 @@ const Projects = () => {
               <button
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide border ${activeCategory === category
-                  ? "bg-[#c8a97e]/15 text-[#d4b896] border-[#c8a97e]/30"
-                  : "bg-white/[0.03] text-white/50 hover:text-white/80 border-white/10 hover:bg-white/[0.06] hover:border-white/20"
+                  ? "bg-accent-gold-light/15 text-accent-gold border-accent-gold-light/30"
+                  : "bg-foreground/[0.03] text-foreground/50 hover:text-foreground/80 border-border hover:bg-foreground/[0.06] hover:border-foreground/20"
                   }`}
                 style={{ transition: 'all 0.3s ease' }}
               >
@@ -215,7 +215,7 @@ const Projects = () => {
                 className="h-full"
               >
                 <TiltCard
-                  className={`tilt-card-wrapper group h-full cursor-pointer transition-all duration-300 relative ${selectedProject.title === project.title ? 'ring-2 ring-[#c8a97e]/50 ring-offset-4 ring-offset-[#0b0c10]' : ''
+                  className={`tilt-card-wrapper group h-full cursor-pointer transition-all duration-300 relative ${selectedProject.title === project.title ? 'ring-2 ring-[#c8a97e]/50 ring-offset-4 ring-offset-background' : ''
                     }`}
                   tiltMax={7}
                   glareEnabled={true}
@@ -229,7 +229,7 @@ const Projects = () => {
 
                     {/* Top Bar */}
                     <div className="flex justify-between items-center mb-8 relative z-10">
-                      <div className="p-3 rounded-xl bg-[#c8a97e]/10 text-[#c8a97e]/70 group-hover:bg-[#c8a97e]/15" style={{ transition: 'background 0.3s ease' }}>
+                      <div className="p-3 rounded-xl bg-accent-gold-light/10 text-accent-gold-light/70 group-hover:bg-accent-gold-light/15" style={{ transition: 'background 0.3s ease' }}>
                         <FolderOpen className="w-8 h-8" />
                       </div>
 
@@ -243,7 +243,7 @@ const Projects = () => {
                               setModalProject(project);
                             }
                           }}
-                          className="text-white/30 hover:text-[#c8a97e] flex items-center gap-2 text-sm font-medium transition-colors"
+                          className="text-foreground/30 hover:text-accent-gold-light flex items-center gap-2 text-sm font-medium transition-colors"
                         >
                           {project.actionType === 'external' ? (
                             <><ExternalLink className="w-5 h-5" /> Visit Site</>
@@ -256,23 +256,23 @@ const Projects = () => {
 
                     {/* Content */}
                     <div className="flex-grow relative z-10">
-                      <h3 className="text-xl font-bold text-white/90 mb-3 group-hover:text-[#d4b896]" style={{ transition: 'color 0.3s ease' }}>
+                      <h3 className="text-xl font-bold text-foreground/90 mb-3 group-hover:text-accent-gold" style={{ transition: 'color 0.3s ease' }}>
                         {project.title}
                       </h3>
                       {/* Summary reveal on hover */}
                       <div className="overflow-hidden">
-                        <p className="text-white/50 text-sm leading-relaxed mb-6 transition-all duration-500 group-hover:text-white/70">
+                        <p className="text-foreground/50 text-sm leading-relaxed mb-6 transition-all duration-500 group-hover:text-foreground/70">
                           {project.description}
                         </p>
                       </div>
                     </div>
 
                     {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5 relative z-10">
+                    <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-border relative z-10">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs font-mono text-[#c8a97e]/50 bg-white/[0.03] px-2 py-1 rounded-md border border-white/10 group-hover:text-[#c8a97e]/70 group-hover:border-[#c8a97e]/15"
+                          className="text-xs font-mono text-accent-gold-light/50 bg-foreground/[0.03] px-2 py-1 rounded-md border border-border group-hover:text-accent-gold-light/70 group-hover:border-accent-gold-light/15"
                           style={{ transition: 'all 0.3s ease' }}
                         >
                           {tech}
@@ -298,12 +298,12 @@ const Projects = () => {
               href="https://github.com/Omesh2004"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/[0.04] border border-white/10 rounded-full text-white/60 hover:text-[#c8a97e] hover:bg-white/[0.06] hover:border-[#c8a97e]/20 group font-medium"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-foreground/[0.04] border border-border rounded-full text-foreground/60 hover:text-accent-gold-light hover:bg-foreground/[0.06] hover:border-accent-gold-light/20 group font-medium"
               style={{ transition: 'all 0.3s ease' }}
             >
               <Github className="w-5 h-5" />
               <span>View More on GitHub</span>
-              <span className="opacity-0 group-hover:opacity-100 text-[#c8a97e]/60" style={{ transition: 'opacity 0.3s ease' }}>→</span>
+              <span className="opacity-0 group-hover:opacity-100 text-accent-gold-light/60" style={{ transition: 'opacity 0.3s ease' }}>→</span>
             </a>
           </MagneticButton>
         </motion.div>
@@ -324,19 +324,19 @@ const Projects = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#121318] border border-white/10 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative"
+              className="bg-card border border-border rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative"
             >
               {/* Modal Header */}
-              <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/[0.02]">
+              <div className="p-4 border-b border-border flex justify-between items-center bg-foreground/[0.02]">
                 <div className="flex items-center gap-3">
-                  <BookOpen className="w-5 h-5 text-[#c8a97e]" />
-                  <span className="font-mono text-white/90 font-medium">
+                  <BookOpen className="w-5 h-5 text-accent-gold-light" />
+                  <span className="font-mono text-foreground/90 font-medium">
                     {modalProject.actionType === 'pdf' ? 'DOCUMENTATION.pdf' : 'README.md'}
                   </span>
                 </div>
                 <button
                   onClick={() => setModalProject(null)}
-                  className="p-2 text-white/50 hover:text-white/90 hover:bg-white/[0.05] rounded-lg transition-colors"
+                  className="p-2 text-foreground/50 hover:text-foreground/90 hover:bg-foreground/[0.05] rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -345,9 +345,9 @@ const Projects = () => {
               {/* Modal Content */}
               <div className="p-8 overflow-y-auto flex-1 h-full flex flex-col min-h-[60vh]">
                 {modalProject.actionType === 'pdf' ? (
-                  <iframe src={modalProject.pdfUrl} className="w-full flex-1 min-h-[70vh] rounded-xl border border-white/10 bg-white" title="PDF Document" />
+                  <iframe src={modalProject.pdfUrl} className="w-full flex-1 min-h-[70vh] rounded-xl border border-border bg-background" title="PDF Document" />
                 ) : (
-                  <div className="prose prose-invert prose-headings:text-white/90 prose-p:text-white/70 prose-a:text-[#c8a97e] hover:prose-a:text-[#d4b896] prose-strong:text-white/90 prose-ul:text-white/70 prose-li:marker:text-[#c8a97e]/50 max-w-none">
+                  <div className="prose dark:prose-invert prose-headings:text-foreground/90 prose-p:text-foreground/70 prose-a:text-accent-gold-light hover:prose-a:text-accent-gold prose-strong:text-foreground/90 prose-ul:text-foreground/70 prose-li:marker:text-accent-gold-light/50 max-w-none">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {modalProject.readme || '*No README available.*'}
                     </ReactMarkdown>
@@ -374,11 +374,11 @@ const Projects = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#121318] border border-white/10 rounded-2xl w-full max-w-sm overflow-hidden flex flex-col shadow-2xl"
+              className="bg-card border border-border rounded-2xl w-full max-w-sm overflow-hidden flex flex-col shadow-2xl"
             >
-              <div className="p-6 text-center border-b border-white/5">
-                <h3 className="text-xl font-bold text-white/90">{actionPromptProject.title}</h3>
-                <p className="text-white/50 text-sm mt-2">What would you like to do?</p>
+              <div className="p-6 text-center border-b border-border">
+                <h3 className="text-xl font-bold text-foreground/90">{actionPromptProject.title}</h3>
+                <p className="text-foreground/50 text-sm mt-2">What would you like to do?</p>
               </div>
 
               <div className="p-4 flex flex-col gap-3">
@@ -388,7 +388,7 @@ const Projects = () => {
                     setActionPromptProject(null);
                     window.scrollTo({ top: document.getElementById('projects')?.offsetTop || 0, behavior: 'smooth' });
                   }}
-                  className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-white/[0.03] hover:bg-[#c8a97e]/10 text-white/80 hover:text-[#c8a97e] border border-white/5 hover:border-[#c8a97e]/30 transition-all group"
+                  className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-foreground/[0.03] hover:bg-accent-gold-light/10 text-foreground/80 hover:text-accent-gold-light border border-border hover:border-accent-gold-light/30 transition-all group"
                 >
                   <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   <span className="font-medium">{actionPromptProject.mediaType === 'video' ? 'Play Demo Video' : 'View Image'}</span>
@@ -403,7 +403,7 @@ const Projects = () => {
                     }
                     setActionPromptProject(null);
                   }}
-                  className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-white/80 hover:text-white border border-white/5 hover:border-white/20 transition-all group"
+                  className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-foreground/[0.03] hover:bg-foreground/[0.08] text-foreground/80 hover:text-foreground border border-border hover:border-foreground/20 transition-all group"
                 >
                   {actionPromptProject.actionType === 'external' ? (
                     <><ExternalLink className="w-5 h-5 group-hover:scale-110 transition-transform" /> <span className="font-medium">Visit Site</span></>
@@ -418,7 +418,7 @@ const Projects = () => {
                       window.open(actionPromptProject.github, '_blank');
                       setActionPromptProject(null);
                     }}
-                    className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-[#c8a97e]/5 hover:bg-[#c8a97e]/10 text-[#c8a97e] border border-[#c8a97e]/20 hover:border-[#c8a97e]/40 transition-all group"
+                    className="flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-accent-gold-light/5 hover:bg-accent-gold-light/10 text-accent-gold-light border border-accent-gold-light/20 hover:border-accent-gold-light/40 transition-all group"
                   >
                     <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     <span className="font-medium">Go to Repository</span>

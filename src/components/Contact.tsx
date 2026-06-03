@@ -84,7 +84,7 @@ const Contact = () => {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <span className="text-[#c8a97e] font-mono text-2xl mr-2">05.</span> Contact
+        <span className="text-accent-gold-light font-mono text-2xl mr-2">05.</span> Contact
       </motion.h2>
 
       <motion.div
@@ -104,8 +104,8 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
             >
-              <Card className="p-8 bg-white/[0.03] border-white/10 h-full flex flex-col hover:border-[#c8a97e]/10" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
-                <h3 className="text-2xl font-bold text-[#d4b896] mb-8">Get in Touch</h3>
+              <Card className="p-8 bg-foreground/[0.03] border-border h-full flex flex-col hover:border-accent-gold-light/10" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
+                <h3 className="text-2xl font-bold text-accent-gold mb-8">Get in Touch</h3>
                 <div className="space-y-6 flex-grow flex flex-col justify-center">
                   {contactInfo.map((info, i) => (
                     <motion.div
@@ -117,12 +117,12 @@ const Contact = () => {
                       viewport={{ once: true }}
                       className="flex items-center gap-6 group"
                     >
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/10 group-hover:border-white/20" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
+                      <div className="p-3 rounded-xl bg-foreground/[0.04] border border-border group-hover:border-foreground/20" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
                         <info.icon className="w-6 h-6" style={{ color: info.color }} />
                       </div>
                       <div>
-                        <p className="text-sm text-white/40 mb-1">{info.label}</p>
-                        <p className="text-white/70 font-medium tracking-wide">{info.value}</p>
+                        <p className="text-sm text-foreground/40 mb-1">{info.label}</p>
+                        <p className="text-foreground/70 font-medium tracking-wide">{info.value}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -137,8 +137,8 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
             >
-              <Card className="p-8 bg-white/[0.03] border-white/10 h-full flex flex-col hover:border-[#c8a97e]/10" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
-                <h3 className="text-2xl font-bold text-[#d4b896] mb-8">Connect with Me</h3>
+              <Card className="p-8 bg-foreground/[0.03] border-border h-full flex flex-col hover:border-accent-gold-light/10" style={{ transition: 'background 0.3s ease, border-color 0.3s ease' }}>
+                <h3 className="text-2xl font-bold text-accent-gold mb-8">Connect with Me</h3>
                 <div className="grid grid-cols-1 gap-4 flex-grow flex flex-col justify-center">
                   {socialLinks.map((link, i) => (
                     <motion.div
@@ -154,14 +154,14 @@ const Contact = () => {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/10 group hover:bg-white/[0.06] hover:border-white/20"
+                          className="flex items-center gap-4 p-4 bg-foreground/[0.03] rounded-xl border border-border group hover:bg-foreground/[0.06] hover:border-foreground/20"
                           style={{ transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.3s ease' }}
                         >
-                          <div className="p-2 rounded-lg bg-white/[0.04] border border-white/5">
+                          <div className="p-2 rounded-lg bg-foreground/[0.04] border border-foreground/5">
                             <link.icon className="w-5 h-5" style={{ color: link.color }} />
                           </div>
-                          <span className="text-white/60 font-medium group-hover:text-white/90" style={{ transition: 'color 0.3s ease' }}>{link.name}</span>
-                          <span className="ml-auto opacity-0 group-hover:opacity-100 text-[#c8a97e]/50" style={{ transition: 'opacity 0.3s ease' }}>→</span>
+                          <span className="text-foreground/60 font-medium group-hover:text-foreground/90" style={{ transition: 'color 0.3s ease' }}>{link.name}</span>
+                          <span className="ml-auto opacity-0 group-hover:opacity-100 text-accent-gold-light/50" style={{ transition: 'opacity 0.3s ease' }}>→</span>
                         </a>
                       </MagneticButton>
                     </motion.div>
