@@ -122,7 +122,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm text-foreground/40 mb-1">{info.label}</p>
-                        <p className="text-foreground/70 font-medium tracking-wide">{info.value}</p>
+                        <p className="text-foreground/70 font-medium tracking-wide break-all">{info.value}</p>
                       </div>
                     </motion.div>
                   ))}

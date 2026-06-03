@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTheme } from './ThemeProvider';
 
 interface Particle {
   x: number;
@@ -7,6 +8,7 @@ interface Particle {
   vy: number;
   size: number;
   opacity: number;
+  shape?: string;
 }
 
 const MatrixBackground: React.FC = () => {
@@ -15,6 +17,13 @@ const MatrixBackground: React.FC = () => {
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number>(0);
   const [isMobile, setIsMobile] = useState(false);
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const themeRef = useRef(currentTheme);
+
+  useEffect(() => {
+    themeRef.current = currentTheme;
+  }, [currentTheme]);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
@@ -27,7 +36,7 @@ const MatrixBackground: React.FC = () => {
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    const PARTICLE_COUNT = isMobile ? 25 : 55;
+    const PARTICLE_COUNT = isMobile ? 40 : 85;
     const CONNECTION_DISTANCE = isMobile ? 80 : 120;
     const MOUSE_RADIUS = 150;
 
@@ -46,10 +55,11 @@ const MatrixBackground: React.FC = () => {
         particles.push({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: (Math.random() - 0.5) * 0.8,
           size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.4 + 0.15,
+          shape: Math.random() > 0.6 ? 'circle' : Math.random() > 0.5 ? 'cross' : 'square',
         });
       }
       particlesRef.current = particles;
@@ -68,6 +78,26 @@ const MatrixBackground: React.FC = () => {
       const h = window.innerHeight;
 
       ctx.clearRect(0, 0, w, h);
+
+      // Draw subtle moving grid in both modes
+      ctx.beginPath();
+      const isLightMode = themeRef.current === 'light';
+      ctx.strokeStyle = isLightMode ? 'rgba(0, 0, 0, 0.03)' : 'rgba(200, 169, 126, 0.03)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      const offsetX = (performance.now() / 40) % gridSize;
+      const offsetY = (performance.now() / 40) % gridSize;
+      
+      for (let x = offsetX; x < w; x += gridSize) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+      }
+      for (let y = offsetY; y < h; y += gridSize) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+      }
+      ctx.stroke();
+
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
 
@@ -80,8 +110,8 @@ const MatrixBackground: React.FC = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MOUSE_RADIUS) {
             const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-            p.vx += (dx / dist) * force * 0.015;
-            p.vy += (dy / dist) * force * 0.015;
+            p.vx += (dx / dist) * force * 0.03;
+            p.vy += (dy / dist) * force * 0.03;
           }
         }
 
@@ -107,8 +137,9 @@ const MatrixBackground: React.FC = () => {
 
           if (dist < CONNECTION_DISTANCE) {
             const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+            const colorRGB = themeRef.current === 'light' ? '30, 30, 30' : '200, 169, 126';
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(200, 169, 126, ${alpha})`;
+            ctx.strokeStyle = `rgba(${colorRGB}, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -119,17 +150,38 @@ const MatrixBackground: React.FC = () => {
 
       // Draw particles
       for (const p of particles) {
+        const isLight = themeRef.current === 'light';
+        const colorRGB = isLight ? '30, 30, 30' : '200, 169, 126';
+        
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200, 169, 126, ${p.opacity})`;
-        ctx.fill();
+        if (isLight && p.shape === 'cross') {
+           const s = p.size * 2.5;
+           ctx.moveTo(p.x - s, p.y);
+           ctx.lineTo(p.x + s, p.y);
+           ctx.moveTo(p.x, p.y - s);
+           ctx.lineTo(p.x, p.y + s);
+           ctx.strokeStyle = `rgba(${colorRGB}, ${p.opacity})`;
+           ctx.lineWidth = 1.2;
+           ctx.stroke();
+        } else if (isLight && p.shape === 'square') {
+           const s = p.size * 2;
+           ctx.rect(p.x - s, p.y - s, s * 2, s * 2);
+           ctx.strokeStyle = `rgba(${colorRGB}, ${p.opacity})`;
+           ctx.lineWidth = 1.2;
+           ctx.stroke();
+        } else {
+           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+           ctx.fillStyle = `rgba(${colorRGB}, ${p.opacity})`;
+           ctx.fill();
+        }
       }
 
       // Mouse glow (desktop only)
       if (!isMobile && mouse.x > 0) {
+        const colorRGB = themeRef.current === 'light' ? '30, 30, 30' : '200, 169, 126';
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 120);
-        gradient.addColorStop(0, 'rgba(200, 169, 126, 0.04)');
-        gradient.addColorStop(1, 'rgba(200, 169, 126, 0)');
+        gradient.addColorStop(0, `rgba(${colorRGB}, 0.04)`);
+        gradient.addColorStop(1, `rgba(${colorRGB}, 0)`);
         ctx.fillStyle = gradient;
         ctx.fillRect(mouse.x - 120, mouse.y - 120, 240, 240);
       }

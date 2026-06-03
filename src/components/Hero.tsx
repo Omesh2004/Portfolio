@@ -187,6 +187,12 @@ const Hero = () => {
        }
      }
    }, [phase, currentLine, terminalContent]);
+
+  useEffect(() => {
+    if (isComplete && inputRef.current) {
+      inputRef.current.focus({ preventScroll: true });
+    }
+  }, [isComplete]);
   
   const cursorBlink = {
     opacity: [1, 0, 1],
@@ -266,6 +272,25 @@ const Hero = () => {
     }
   };
 
+  const simulateCommand = (cmd: string) => {
+    if (!inputRef.current) return;
+    setUserInput('');
+    inputRef.current.focus({ preventScroll: true });
+    
+    let i = 0;
+    const interval = setInterval(() => {
+      setUserInput(cmd.slice(0, i + 1));
+      i++;
+      if (i === cmd.length) {
+        clearInterval(interval);
+        setTimeout(() => {
+          handleCommand(cmd);
+          setUserInput('');
+        }, 300);
+      }
+    }, 100);
+  };
+
   // Get filtered suggestions based on input
   const suggestions = userInput.trim().length > 0
     ? availableCommands.filter(cmd => cmd.name.toLowerCase().startsWith(userInput.toLowerCase()))
@@ -330,7 +355,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="terminal-body min-h-[500px] flex flex-col">
+          <div className="terminal-body min-h-[650px] md:min-h-[700px] flex flex-col font-mono text-xs md:text-sm">
             <div className="flex-grow relative overflow-hidden">
               {/* Top-anchored content for login / matrix so they render from the top */}
               {(phase === 'login' || phase === 'matrix') && (
@@ -358,14 +383,14 @@ const Hero = () => {
 
               {/* Bottom-anchored terminal: new lines appear at bottom and push older lines up (clipped) */}
               {phase === 'terminal' && (
-                <div className="absolute bottom-0 left-0 right-0 flex flex-col space-y-1">
+                <div className="absolute bottom-0 left-0 right-0 flex flex-col space-y-0.5">
                   {terminalLines.map((line, index) => {
                     const lineContent = terminalContent[index];
                     const isCommand = line.startsWith('$');
                     const lineType = isCommand ? 'command' : lineContent?.type;
                     
                     return lineType === 'pre' ? (
-                      <pre key={index} className="text-foreground/80 text-xs md:text-sm leading-tight my-2">{line}</pre>
+                      <pre key={index} className="text-foreground/80 leading-tight my-1">{line}</pre>
                     ) : (
                       <motion.div
                         key={index}
@@ -405,7 +430,6 @@ const Hero = () => {
                               suggestions.length > 0 ? 'text-transparent' : 'text-accent-gold-light'
                             }`}
                             placeholder=""
-                            autoFocus
                           />
                           {/* Inline suggestion - lighter text overlaid */}
                           {suggestions.length > 0 && (
@@ -427,9 +451,20 @@ const Hero = () => {
             </div>
 
             {phase === 'terminal' && isComplete && (
-              <div className="mt-4 pt-4 border-t border-border">
+              <div className="mt-3 pt-3 border-t border-border flex flex-col items-center gap-2">
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {['about', 'experience', 'projects', 'contact'].map(section => (
+                    <button 
+                      key={section}
+                      onClick={() => simulateCommand(`cd ${section}`)}
+                      className="px-3 py-1 text-xs rounded border border-border bg-foreground/[0.03] hover:bg-foreground/[0.06] hover:text-accent-gold transition-colors text-foreground/60 capitalize"
+                    >
+                      {section}
+                    </button>
+                  ))}
+                </div>
                 <div className="text-center text-foreground/40 text-xs">
-                  Type 'help' for available commands
+                  Type 'help' for available commands or use quick links above
                 </div>
               </div>
             )}
