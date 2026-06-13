@@ -4,6 +4,12 @@ import { Trophy, CheckCircle } from 'lucide-react';
 
 const otherAchievements = [
   {
+    title: 'Inter IIT Sports',
+    description: 'Represented IIT Patna in Table Tennis as a fresher.',
+    date: '2023',
+    image: '/images/inter iit sports 23.png'
+  },
+  {
     title: 'Inter IIT Tech Meet 14.0',
     description: 'Ranked 2nd in the Pathway problem statement representing IIT Patna.',
     date: '2025',

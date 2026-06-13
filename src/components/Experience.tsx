@@ -80,6 +80,17 @@ const Experience = () => {
       technologies: ["Collaboration", "Agile", "Frontend", "Backend"]
     },
     {
+      title: "Inter IIT Sports",
+      company: "IIT Patna",
+      location: "Patna, India",
+      period: "2023",
+      image: "/images/inter iit sports 23.png",
+      description: [
+        "Represented IIT Patna in Table Tennis as a fresher."
+      ],
+      technologies: ["Table Tennis", "Sports"]
+    },
+    {
       title: "JEE Advanced 2023",
       company: "Competitive Examination",
       location: "India",
