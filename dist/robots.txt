@@ -1,6 +1,8 @@
 User-agent: Googlebot
 Allow: /
 
+Sitemap: https://portfolio-dun-eta-10.vercel.app/sitemap.xml
+
 User-agent: Bingbot
 Allow: /
 
