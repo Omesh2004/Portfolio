@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TerminalShortcut from './components/TerminalShortcut';
+import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProvider } from "./components/ThemeProvider";
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <Analytics />
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>
